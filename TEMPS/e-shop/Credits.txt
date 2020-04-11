@@ -1,0 +1,9 @@
+Credits:
+Jquery
+Bootstrap
+Font-awesome
+slick.js
+noUiSlider
+jquery.zoom.js
+Images : Unsplash , pixabay
+Goolgle fonts : Hind
