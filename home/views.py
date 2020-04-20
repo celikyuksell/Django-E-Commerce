@@ -10,8 +10,17 @@ from product.models import Category, Product
 def index(request):
     setting = Setting.objects.get(pk=1)
     category = Category.objects.all()
+    products_slider = Product.objects.all().order_by('id')[:4]  #first 4 products
+    products_latest = Product.objects.all().order_by('-id')[:4] #last 4 products
+    products_picked = Product.objects.all().order_by('?')[:4]   #Random selected 4 products
+
     page="home"
-    context={'setting':setting, 'page':page,'category':category }
+    context={'setting':setting,
+             'page':page,
+             'products_slider': products_slider,
+             'products_latest': products_latest,
+             'products_picked': products_picked,
+             'category':category }
     return render(request,'index.html',context)
 
 
@@ -40,5 +49,8 @@ def contactus(request):
     return render(request, 'contactus.html', context)
 
 def category_products(request,id,slug):
+    category = Category.objects.all()
     products = Product.objects.filter(category_id=id)
-    return HttpResponse(products)
+    context={'products': products,
+             'category':category }
+    return render(request,'category_products.html',context)
