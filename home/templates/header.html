@@ -48,17 +48,29 @@
 
 					<!-- Search -->
 					<div class="header-search">
-						<form>
-							<input class="input search-input" type="text" placeholder="Enter your keyword">
-							<select class="input search-categories">
+						<form action="/search/" method="post">
+                            {% csrf_token %}
+							<input id="query" name="query" class="input search-input" type="text" placeholder="Enter your keyword">
+							<select name="catid"  class="input search-categories">
 								<option value="0">All Categories</option>
-								<option value="1">Category 01</option>
-								<option value="1">Category 02</option>
+                                {% load mptt_tags %}
+                                {% recursetree category %}
+                                    {% if node.is_leaf_node %}
+                                        <option value="{{ node.id }}">{{ node.title }}</option>
+                                    {% endif %}
+                                    {% if not node.is_leaf_node %}
+                                        <optgroup label="{{ node.title }}">
+                                            {{ children }}
+                                        </optgroup>
+                                    {% endif %}
+                                {% endrecursetree %}
+
 							</select>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 						</form>
 					</div>
 					<!-- /Search -->
+
 				</div>
 				<div class="pull-right">
 					<ul class="header-btns">
