@@ -121,59 +121,30 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="product-reviews">
+                                                {% for rs in comments %}
                                                 <div class="single-review">
                                                     <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                    </div>
-                                                </div>
+                                                        <div><a href="#"><i class="fa fa-user-o"></i> {{ rs.user.first_name }}</a> </div>
+                                                        <div><b>{{ rs.subject }}</b> </div>
+                                                        <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at}}</a></div>
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
                                                         <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
-                                                        </div>
-                                                    </div>
-                                                    <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                                                    </div>
-                                                </div>
+                                                            <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                                            <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
 
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> John</a></div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> 27 DEC 2017 / 8:0 PM</a></div>
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star"></i>
-                                                            <i class="fa fa-star-o empty"></i>
                                                         </div>
+
                                                     </div>
                                                     <div class="review-body">
-                                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute
-                                                            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                                        <p>{{ rs.comment }}</p>
                                                     </div>
                                                 </div>
+                                                {% endfor %}
+
+
 
                                                 <ul class="reviews-pages">
                                                     <li class="active">1</li>
@@ -185,31 +156,43 @@
                                         </div>
                                         <div class="col-md-6">
                                             <h4 class="text-uppercase">Write Your Review</h4>
-                                            <p>Your email address will not be published.</p>
-                                            <form class="review-form">
+
+                                            {% if messages %}
+                                                {% for message in messages %}
+                                                    <div class="alert alert-{{message.tags}}" role="alert">
+                                                        {{ message }}
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+
+                                            <form class="review-form" action="/product/addcomment/{{ product.id }}" method="post">
+                                                {% csrf_token %}
                                                 <div class="form-group">
-                                                    <input class="input" type="text" placeholder="Your Name" />
+                                                    <input name="subject" class="input" type="text" placeholder="Your subject" />
                                                 </div>
+
                                                 <div class="form-group">
-                                                    <input class="input" type="email" placeholder="Email Address" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <textarea class="input" placeholder="Your review"></textarea>
+                                                    <textarea name="comment" class="input" placeholder="Your review"></textarea>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="input-rating">
                                                         <strong class="text-uppercase">Your Rating: </strong>
                                                         <div class="stars">
-                                                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
-                                                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
-                                                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
-                                                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
-                                                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                            <input type="radio" id="star5" name="rate" value="5" /><label for="star5"></label>
+                                                            <input type="radio" id="star4" name="rate" value="4" /><label for="star4"></label>
+                                                            <input type="radio" id="star3" name="rate" value="3" /><label for="star3"></label>
+                                                            <input type="radio" id="star2" name="rate" value="2" /><label for="star2"></label>
+                                                            <input type="radio" id="star1" name="rate" value="1" /><label for="star1"></label>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="primary-btn">Submit</button>
+                                                {% if user.id is not None %}
+                                                    <button class="primary-btn">Submit</button>
+                                                {% else %}
+                                                    You must be logged in to post a review
+                                                {% endif %}
                                             </form>
+
                                         </div>
                                     </div>
 

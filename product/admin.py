@@ -3,7 +3,7 @@ from django.contrib import admin
 # Register your models here.
 from mptt.admin import DraggableMPTTAdmin
 
-from product.models import Category, Product, Images
+from product.models import Category, Product, Images, Comment
 
 
 class CategoryAdmin(admin.ModelAdmin):
@@ -55,6 +55,12 @@ class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
     prepopulated_fields = {'slug': ('title',)}
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['subject','comment', 'status','create_at']
+    list_filter = ['status']
+    readonly_fields = ('subject','comment','ip','user','product','rate')
+
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Product,ProductAdmin)
+admin.site.register(Comment,CommentAdmin)
 admin.site.register(Images)
