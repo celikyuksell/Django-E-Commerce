@@ -1,0 +1,6 @@
+   e-Commerce -> SHOPCART
+1- Creating order application- ok
+2- Cretaing Shopcart model Admin -ok
+3- Adding product to Shopcart
+4- Listing Shopcart Items
+5- Deleteing product from Shopcart

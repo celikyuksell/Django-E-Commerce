@@ -104,3 +104,5 @@ def product_detail(request,id,slug):
              'comments': comments,
               }
     return render(request,'product_detail.html',context)
+
+

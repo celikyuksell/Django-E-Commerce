@@ -91,11 +91,15 @@
                             </div>
 
                             <div class="product-btns">
-                                <div class="qty-input">
-                                    <span class="text-uppercase">QTY: </span>
-                                    <input class="input" type="number">
-                                </div>
-                                <button class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                <form action="/order/addtoshopcart/{{ product.id }}" method="post">
+                                    {% csrf_token %}
+                                    <div class="qty-input">
+                                        <span class="text-uppercase">QTY: </span>
+                                        <input class="input" name="quantity" type="number" value="1" min="1" max="{{ product.amount }}">
+                                    </div>
+                                    <button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+                                </form>
+
                                 <div class="pull-right">
                                     <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                     <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
@@ -122,26 +126,26 @@
                                         <div class="col-md-6">
                                             <div class="product-reviews">
                                                 {% for rs in comments %}
-                                                <div class="single-review">
-                                                    <div class="review-heading">
-                                                        <div><a href="#"><i class="fa fa-user-o"></i> {{ rs.user.first_name }}</a> </div>
-                                                        <div><b>{{ rs.subject }}</b> </div>
-                                                        <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at}}</a></div>
+                                                    <div class="single-review">
+                                                        <div class="review-heading">
+                                                            <div><a href="#"><i class="fa fa-user-o"></i> {{ rs.user.first_name }}</a> </div>
+                                                            <div><b>{{ rs.subject }}</b> </div>
+                                                            <div><a href="#"><i class="fa fa-clock-o"></i> {{ rs.create_at}}</a></div>
 
-                                                        <div class="review-rating pull-right">
-                                                            <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
-                                                            <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
-                                                            <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
-                                                            <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
-                                                            <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+                                                            <div class="review-rating pull-right">
+                                                                <i class="fa fa-star{% if rs.rate < 1 %}-o empty{% endif %}"></i>
+                                                                <i class="fa fa-star{% if rs.rate < 2 %}-o empty{% endif %}"></i>
+                                                                <i class="fa fa-star{% if rs.rate < 3 %}-o empty{% endif %}"></i>
+                                                                <i class="fa fa-star{% if rs.rate < 4 %}-o empty{% endif %}"></i>
+                                                                <i class="fa fa-star{% if rs.rate < 5 %}-o empty{% endif %}"></i>
+
+                                                            </div>
 
                                                         </div>
-
+                                                        <div class="review-body">
+                                                            <p>{{ rs.comment }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="review-body">
-                                                        <p>{{ rs.comment }}</p>
-                                                    </div>
-                                                </div>
                                                 {% endfor %}
 
 
