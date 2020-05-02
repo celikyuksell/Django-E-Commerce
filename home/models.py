@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 from django.forms import ModelForm, TextInput, Textarea
+from django.utils.safestring import mark_safe
 
 
 class Setting(models.Model):
@@ -66,3 +67,5 @@ class ContactForm(ModelForm):
             'email'   : TextInput(attrs={'class': 'input','placeholder':'Email Address'}),
             'message' : Textarea(attrs={'class': 'input','placeholder':'Your Message','rows':'5'}),
         }
+
+
