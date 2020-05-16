@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.db.models import Avg, Count
 from django.forms import ModelForm
 from django.urls import reverse
 from django.utils.safestring import mark_safe
@@ -73,6 +74,21 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('category_detail', kwargs={'slug': self.slug})
+
+    def avaregereview(self):
+        reviews = Comment.objects.filter(product=self, status='True').aggregate(avarage=Avg('rate'))
+        avg=0
+        if reviews["avarage"] is not None:
+            avg=float(reviews["avarage"])
+        return avg
+
+    def countreview(self):
+        reviews = Comment.objects.filter(product=self, status='True').aggregate(count=Count('id'))
+        cnt=0
+        if reviews["count"] is not None:
+            cnt = int(reviews["count"])
+        return cnt
+
 
 class Images(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)

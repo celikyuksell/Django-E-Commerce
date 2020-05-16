@@ -1,95 +1,98 @@
 {% load static %}
 
-	<!-- section -->
-	<div class="section">
-		<!-- container -->
-		<div class="container">
-			<!-- row -->
-			<div class="row">
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h2 class="title">Latest Products</h2>
-					</div>
-				</div>
-				<!-- section title -->
-                {% for rs in products_latest %}
-				<!-- Product Single -->
-				<div class="col-md-3 col-sm-6 col-xs-6">
-					<div class="product product-single">
-						<div class="product-thumb">
-							<a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
-							<img src="{{ rs.image.url }}" alt="" style="height: 200px">
-						</div>
-						<div class="product-body">
-							<h3 class="product-price">${{ rs.price }}</h3>
-							<div class="product-rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star-o empty"></i>
-							</div>
-							<h2 class="product-name"><a href="#">{{ rs.title }}</a></h2>
-							<div class="product-btns">
-								<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-								<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-								<a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Product Single -->
-                {% endfor %}
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">Latest Products</h2>
+                </div>
+            </div>
+            <!-- section title -->
+            {% for rs in products_latest %}
+                <!-- Product Single -->
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="product product-single">
+                        <div class="product-thumb">
+                            <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+                            <img src="{{ rs.image.url }}" alt="" style="height: 200px">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-price">${{ rs.price }}</h3>
+                            <div class="product-rating">
+                                <i class="fa fa-star{% if rs.avaregereview < 1%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 2%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 3%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 4%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 5%}-o empty{% endif%}"></i>
+                                {{ rs.avaregereview}}/{{ rs.countreview}}
 
-			</div>
-			<!-- /row -->
+                            </div>
+                            <h2 class="product-name"><a href="#">{{ rs.title }}</a></h2>
+                            <div class="product-btns">
+                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                                <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Product Single -->
+            {% endfor %}
 
-
-			<!-- row -->
-			<div class="row">
-				<!-- section title -->
-				<div class="col-md-12">
-					<div class="section-title">
-						<h2 class="title">Picked For You</h2>
-					</div>
-				</div>
-				<!-- section title -->
-
-								<!-- section title -->
-                {% for rs in products_picked %}
-				<!-- Product Single -->
-				<div class="col-md-3 col-sm-6 col-xs-6">
-					<div class="product product-single">
-						<div class="product-thumb">
-							<a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
-							<img src="{{ rs.image.url }}" alt="" style="height: 200px">
-						</div>
-						<div class="product-body">
-							<h3 class="product-price">${{ rs.price }}</h3>
-							<div class="product-rating">
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star"></i>
-								<i class="fa fa-star-o empty"></i>
-							</div>
-							<h2 class="product-name"><a href="#">{{ rs.title }}</a></h2>
-							<div class="product-btns">
-								<button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
-								<button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-								<a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /Product Single -->
-                {% endfor %}
+        </div>
+        <!-- /row -->
 
 
-			</div>
-			<!-- /row -->
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /section -->
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">Picked For You</h2>
+                </div>
+            </div>
+            <!-- section title -->
+
+            <!-- section title -->
+            {% for rs in products_picked %}
+                <!-- Product Single -->
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="product product-single">
+                        <div class="product-thumb">
+                            <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+                            <img src="{{ rs.image.url }}" alt="" style="height: 200px">
+                        </div>
+                        <div class="product-body">
+                            <h3 class="product-price">${{ rs.price }}</h3>
+                            <div class="product-rating">
+                                <i class="fa fa-star{% if rs.avaregereview < 1%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 2%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 3%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 4%}-o empty{% endif%}"></i>
+                                <i class="fa fa-star{% if rs.avaregereview < 5%}-o empty{% endif%}"></i>
+                                {{ rs.avaregereview}}/{{ rs.countreview}}
+                            </div>
+                            <h2 class="product-name"><a href="#">{{ rs.title }}</a></h2>
+                            <div class="product-btns">
+                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                                <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Product Single -->
+            {% endfor %}
+
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->

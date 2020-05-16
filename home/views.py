@@ -1,6 +1,7 @@
 import json
 
 from django.contrib import messages
+from django.db.models import Avg, Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -98,6 +99,11 @@ def product_detail(request,id,slug):
     product = Product.objects.get(pk=id)
     images = Images.objects.filter(product_id=id)
     comments = Comment.objects.filter(product_id=id,status='True')
+    #review = Comment.objects.filter(product_id=id, status='True').aggregate(Count('id'),Avg('rate'))
+    #Retrieve values :  review.rate__avg ,  review.id__count
+    #review= Comment.objects.raw('SELECT id,count(id) as countrew, avg(rate) as avgrew FROM product_comment WHERE product_id=%s and status="True"',[id])[0]
+    #Retrieve values :  review.avgrew ,  review.countrew
+
     context={'product': product,
              'category':category,
              'images': images,
