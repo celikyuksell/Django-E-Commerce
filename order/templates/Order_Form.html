@@ -96,13 +96,30 @@
                             </thead>
                             <tbody>
 
-                            {% for rs in schopcart %}
+                            {% for rs in shopcart %}
                                 <tr>
-                                    <td class="thumb"><img src="{{rs.product.image.url}}" alt=""></td>
+                                    <td class="thumb">
+                                        {% if rs.variant.image_id  > 0 %}
+                                            <img src="{{rs.variant.image }}" alt="">
+                                        {% else %}
+                                            <img src="{{rs.product.image.url}}" alt="">
+                                        {% endif %}</td>
                                     <td class="details"><a href="/product/{{ rs.product.id }}/{{ rs.product.slug }}">{{rs.product}}</a>  </td>
-                                    <td class="price text-center"><strong>${{rs.product.price}}</strong></td>
+                                    <td class="price text-center"><strong>$
+                                        {% if rs.product.variant == 'None' %}
+                                            {{rs.product.price}}
+                                        {% else %}
+                                            {{rs.variant.price}}
+                                        {% endif %}
+                                    </strong></td>
                                     <td class="qty text-center"><strong>{{rs.quantity}}</strong></td>
-                                    <td class="total text-center"><strong class="primary-color">${{rs.amount}}</strong></td>
+                                    <td class="total text-center"><strong class="primary-color">$
+                                        {% if rs.product.variant == 'None' %}
+                                            {{rs.amount}}
+                                        {% else %}
+                                            {{rs.varamount}}
+                                        {% endif %}
+                                    </strong></td>
                                 </tr>
 
                             {% endfor %}

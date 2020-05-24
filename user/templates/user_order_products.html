@@ -49,10 +49,14 @@
                                 <tr>
                                     <td class="text-left">
                                         <a href="/product/{{ rs.product_id }}/{{ rs.product.slug }}">
-                                            <img src="{{ rs.product.image.url }}" height="80">
+                                            {% if rs.variant.image_id > 0 %}
+                                                <img src="{{rs.variant.image }}" alt="" style="height: 80px">
+                                            {% else %}
+                                                <img src="{{rs.product.image.url}}" alt="" style="height: 80px">
+                                            {% endif %}
                                         </a>
                                     </td>
-                                    <td>{{ rs.product.title}} </td>
+                                    <td>{{ rs.product.title}} {{ rs.variant.size }}   {{ rs.variant.color }}</td>
                                     <td class="text-left">{{ rs.price}} </td>
                                     <td class="text-left">{{ rs.quantity}} </td>
                                     <td class="text-left">{{ rs.amount}} </td>

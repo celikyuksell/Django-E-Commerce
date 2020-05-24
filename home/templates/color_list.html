@@ -1,0 +1,13 @@
+<input type="hidden" name="size" id="size" value="{{ size_id }}">
+<ul class="color-option" >
+    <li><span class="text-uppercase">Color:</span></li>
+    {% for rs in colors %}
+        <input type="radio" name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
+        <li >
+            <a href="#" style="background-color:{{ rs.color.code }}; color: #D9D9D9; text-shadow: 1px 1px #000000; width: 70px" >
+                {{ rs.color }} ${{ rs.price }}
+            </a>
+            <img src="{{ rs.image }}" style="height: 70px">
+        </li>
+    {% endfor %}
+</ul>

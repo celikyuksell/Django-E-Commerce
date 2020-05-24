@@ -1,0 +1,9 @@
+{{ varproduct.title }}
+<p><strong>Availability:</strong> {% if varproduct.quantity > 0 %}  In Stock {% else %} Out of stock {% endif %}</p>
+<h3 class="product-price">{{ varproduct.price}}<del class="product-old-price">$45.00</del></h3>
+<input type="hidden" name="variantid" id="variamtid" value="{{ varproduct.id}}">
+<div class="qty-input">
+    <span class="text-uppercase">QTY: </span>
+    <input class="input" name="quantity" type="number" value="1" min="1" max="{{ varproduct.quantity }}">
+    <button type="submit" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart </button>
+</div>

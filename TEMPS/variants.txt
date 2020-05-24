@@ -1,0 +1,42 @@
+1- Create Models
+	Color, 
+	Size, 
+	Variants
+
+2- Add variant filed to Product 
+	variant (Noe, Size-Color, Size, Color)
+
+3- Install image thumbnails
+    	pip install django-admin-thumbnails
+	Define thumbnails variants images  
+
+4-Set Admin for new models 
+	Color, 
+	Size, 
+	Variants
+
+4-Set Variants inline for Product in admin
+
+5-Product Detail
+	Change product detail function 	-> views
+	Change product link depending on variant ->templates
+	Add variants on product detail ->templates
+	Apply Ajax for getting Product variant ->->templates
+	Add ajax function  -> View
+	Select Variant Size, Color ->templates
+
+6- Shopcart
+	Define  variant relation in shopcart -> Model
+	Add variant id to shopcart	-> views
+        Get variant price in list	->templates
+
+7- Order
+	Define variant relation in order  -> Model
+	Add variant id to order table 		-> views
+	Add variant in reduction from stock code -> views
+        Get variant information in order list list ->templates
+8- User Orders product
+        Add variant image in order product list
+
+
+

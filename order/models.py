@@ -4,11 +4,13 @@ from django.db import models
 # Create your models here.
 from django.forms import ModelForm
 
-from product.models import Product
+from product.models import Product, Variants
+
 
 class ShopCart(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with varinat
     quantity = models.IntegerField()
 
     def __str__(self):
@@ -21,6 +23,11 @@ class ShopCart(models.Model):
     @property
     def amount(self):
         return (self.quantity * self.product.price)
+
+    @property
+    def varamount(self):
+        return (self.quantity * self.variant.price)
+
 
 class ShopCartForm(ModelForm):
     class Meta:
@@ -68,6 +75,7 @@ class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    variant = models.ForeignKey(Variants, on_delete=models.SET_NULL,blank=True, null=True) # relation with varinat
     quantity = models.IntegerField()
     price = models.FloatField()
     amount = models.FloatField()

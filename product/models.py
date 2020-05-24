@@ -17,9 +17,9 @@ class Category(MPTTModel):
         ('False', 'False'),
     )
     parent = TreeForeignKey('self',blank=True, null=True ,related_name='children', on_delete=models.CASCADE)
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=50)
     keywords = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
     image=models.ImageField(blank=True,upload_to='images/')
     status=models.CharField(max_length=10, choices=STATUS)
     slug = models.SlugField(null=False, unique=True)
@@ -49,14 +49,23 @@ class Product(models.Model):
         ('True', 'True'),
         ('False', 'False'),
     )
+
+    VARIANTS = (
+        ('None', 'None'),
+        ('Size', 'Size'),
+        ('Color', 'Color'),
+        ('Size-Color', 'Size-Color'),
+
+    )
     category = models.ForeignKey(Category, on_delete=models.CASCADE) #many to one relation with Category
     title = models.CharField(max_length=150)
     keywords = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    image=models.ImageField(blank=True,upload_to='images/')
-    price = models.FloatField()
-    amount=models.IntegerField()
-    minamount=models.IntegerField()
+    description = models.TextField(max_length=255)
+    image=models.ImageField(upload_to='images/',null=False)
+    price = models.FloatField(default=0)
+    amount=models.IntegerField(default=0)
+    minamount=models.IntegerField(default=3)
+    variant=models.CharField(max_length=10,choices=VARIANTS, default='None')
     detail=RichTextUploadingField()
     slug = models.SlugField(null=False, unique=True)
     status=models.CharField(max_length=10,choices=STATUS)
@@ -68,9 +77,10 @@ class Product(models.Model):
 
     ## method to create a fake table field in read only mode
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
-
-    image_tag.short_description = 'Image'
+        if self.image.url is not None:
+            return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        else:
+            return ""
 
     def get_absolute_url(self):
         return reverse('category_detail', kwargs={'slug': self.slug})
@@ -121,3 +131,50 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['subject', 'comment', 'rate']
+
+
+class Color(models.Model):
+    name = models.CharField(max_length=20)
+    code = models.CharField(max_length=10, blank=True,null=True)
+    def __str__(self):
+        return self.name
+    def color_tag(self):
+        if self.code is not None:
+            return mark_safe('<p style="background-color:{}">Color </p>'.format(self.code))
+        else:
+            return ""
+
+
+class Size(models.Model):
+    name = models.CharField(max_length=20)
+    code = models.CharField(max_length=10, blank=True,null=True)
+    def __str__(self):
+        return self.name
+
+class Variants(models.Model):
+    title = models.CharField(max_length=100, blank=True,null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.ForeignKey(Color, on_delete=models.CASCADE,blank=True,null=True)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE,blank=True,null=True)
+    image_id = models.IntegerField(blank=True,null=True,default=0)
+    quantity = models.IntegerField(default=1)
+    price = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.title
+
+    def image(self):
+        img = Images.objects.get(id=self.image_id)
+        if img.id is not None:
+             varimage=img.image.url
+        else:
+            varimage=""
+        return varimage
+
+    def image_tag(self):
+        img = Images.objects.get(id=self.image_id)
+        if img.id is not None:
+             return mark_safe('<img src="{}" height="50"/>'.format(img.image.url))
+        else:
+            return ""
+

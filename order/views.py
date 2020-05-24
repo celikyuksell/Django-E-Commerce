@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.utils.crypto import get_random_string
 
 from order.models import ShopCart, ShopCartForm, OrderForm, Order, OrderProduct
-from product.models import Category, Product
+from product.models import Category, Product, Variants
 from user.models import UserProfile
 
 
@@ -18,9 +18,11 @@ def index(request):
 def addtoshopcart(request,id):
     url = request.META.get('HTTP_REFERER')  # get last url
     current_user = request.user  # Access User Session information
+    variantid = request.POST.get('variantid')  # from variant add to cart
+    checkinproduct = ShopCart.objects.filter(product_id=id) # Check product in shopcart
+    checkinvariant = ShopCart.objects.filter(variant_id=variantid)  # Check product in shopcart
 
-    checkproduct = ShopCart.objects.filter(product_id=id) # Check product in shopcart
-    if checkproduct:
+    if checkinproduct and checkinvariant:
         control = 1 # The product is in the cart
     else:
         control = 0 # The product is not in the cart
@@ -36,6 +38,7 @@ def addtoshopcart(request,id):
                 data = ShopCart()
                 data.user_id = current_user.id
                 data.product_id =id
+                data.variant_id = variantid
                 data.quantity = form.cleaned_data['quantity']
                 data.save()
         messages.success(request, "Product added to Shopcart ")
@@ -51,6 +54,7 @@ def addtoshopcart(request,id):
             data.user_id = current_user.id
             data.product_id = id
             data.quantity = 1
+            data.variant_id =None
             data.save()  #
         messages.success(request, "Product added to Shopcart")
         return HttpResponseRedirect(url)
@@ -80,10 +84,13 @@ def deletefromcart(request,id):
 def orderproduct(request):
     category = Category.objects.all()
     current_user = request.user
-    schopcart = ShopCart.objects.filter(user_id=current_user.id)
+    shopcart = ShopCart.objects.filter(user_id=current_user.id)
     total = 0
-    for rs in schopcart:
-        total += rs.product.price * rs.quantity
+    for rs in shopcart:
+        if rs.product.variant == 'None':
+            total += rs.product.price * rs.quantity
+        else:
+            total += rs.variant.price * rs.quantity
 
     if request.method == 'POST':  # if there is a post
         form = OrderForm(request.POST)
@@ -104,21 +111,29 @@ def orderproduct(request):
             data.code =  ordercode
             data.save() #
 
-            # Move  Shopcart items to Order Products items
-            schopcart = ShopCart.objects.filter(user_id=current_user.id)
-            for rs in schopcart:
+
+            for rs in shopcart:
                 detail = OrderProduct()
                 detail.order_id     = data.id # Order Id
                 detail.product_id   = rs.product_id
                 detail.user_id      = current_user.id
                 detail.quantity     = rs.quantity
-                detail.price        = rs.product.price
+                if rs.product.variant == 'None':
+                    detail.price    = rs.product.price
+                else:
+                    detail.price = rs.variant.price
+                detail.variant_id   = rs.variant_id
                 detail.amount        = rs.amount
                 detail.save()
                 # ***Reduce quantity of sold product from Amount of Product
-                product = Product.objects.get(id=rs.product_id)
-                product.amount -= rs.quantity
-                product.save()
+                if  rs.product.variant=='None':
+                    product = Product.objects.get(id=rs.product_id)
+                    product.amount -= rs.quantity
+                    product.save()
+                else:
+                    variant = Variants.objects.get(id=rs.product_id)
+                    variant.quantity -= rs.quantity
+                    variant.save()
                 #************ <> *****************
 
             ShopCart.objects.filter(user_id=current_user.id).delete() # Clear & Delete shopcart
@@ -130,9 +145,8 @@ def orderproduct(request):
             return HttpResponseRedirect("/order/orderproduct")
 
     form= OrderForm()
-    schopcart = ShopCart.objects.filter(user_id=current_user.id)
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'schopcart': schopcart,
+    context = {'shopcart': shopcart,
                'category': category,
                'total': total,
                'form': form,

@@ -36,7 +36,11 @@
                             <div class="product-btns">
                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                {% if rs.variant == 'None'%}
+                                    <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                {% else %}
+                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -81,7 +85,11 @@
                             <div class="product-btns">
                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
-                                <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                 {% if rs.variant == 'None'%}
+                                    <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                {% else %}
+                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

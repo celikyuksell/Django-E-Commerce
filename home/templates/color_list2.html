@@ -1,0 +1,14 @@
+<form method="POST" id="color-form">
+<ul class="color-option" >
+    <li><span class="text-uppercase">Color:</span></li>
+    {% for rs in color %}
+        <input type="radio" name="color" value="{{ rs.id }}">
+        <li >
+            <a href="#" style="background-color:{{ rs.color.code }}; color: #D9D9D9; text-shadow: 1px 1px #000000; width: 70px">
+                {{ rs.color }} ${{ rs.price }}
+            </a>
+            <img src="{{ rs.image }}" style="height: 70px">
+        </li>
+    {% endfor %}
+</ul>
+</form>

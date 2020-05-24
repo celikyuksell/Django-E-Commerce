@@ -1,0 +1,77 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<script src="/static/js/jquery-2.2.4.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script>
+    $(document).on('change', '#post-form',function(e){
+        e.preventDefault();
+        $.ajax({
+            type:'POST',
+            url:'{% url "ajaxpost" %}',
+            data:{
+                title:$('#title').val(),
+                description:$('#description').val(),
+                size:$('#size').val(),
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val(),
+                action: 'post'
+            },
+            success:function(json){
+                document.getElementById("post-form").reset();
+                $(".posts").prepend('<div class="col-md-6">'+
+                    '<div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">' +
+                    '<div class="col p-4 d-flex flex-column position-static">' +
+                    '<h3 class="mb-0">' + json.title + '</h3>' +
+                    '<p class="mb-auto">' + json.description + '</p>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+                )
+            },
+            error : function(xhr,errmsg,err) {
+                $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
+                    " <a href='#' class='close'>&times;</a></div>"); // add the error to the dom
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+    });
+</script>
+<div class="container pt-5">
+<input type="text" class="form-control" id="xxx" placeholder="Title">
+    <form method="POST" id="post-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail1">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Description</label>
+            <textarea class="form-control" id="description" placeholder="Description"></textarea>
+            <select  class="form-control"  name="size" id="size">
+                <option>Blue</option>
+                <option>Yellow</option>
+                <option>Green</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div class="row mb-2 posts">
+        {% for post in posts %}
+            <div class="col-md-6">
+                <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                    <div class="col p-4 d-flex flex-column position-static">
+                        <h3 class="mb-0">{{post.subject}}</h3>
+                        <p class="mb-auto">{{post.comment}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+</body>
+
+</html>

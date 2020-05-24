@@ -23,6 +23,8 @@ from home import views
 from order import views as OrderViews
 from user import views as UserViews
 
+
+
 urlpatterns = [
     path('', include('home.urls')),
     path('home/', include('home.urls')),
@@ -43,6 +45,11 @@ urlpatterns = [
     path('logout/', UserViews.logout_func, name='logout_func'),
     path('signup/', UserViews.signup_form, name='signup_form'),
     path('faq/', UserViews.faq, name='faq'),
+   # path('ajaxtest/', views.ajaxtest, name='ajaxtest'),
+   # path('ajaxpost/', views.ajaxpost, name='ajaxpost'),
+    path('ajaxcolor/', views.ajaxcolor, name='ajaxcolor'),
+
+
 ]
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

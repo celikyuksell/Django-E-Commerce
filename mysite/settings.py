@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'mptt',
+    'django_ajax'
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,5 @@ CKEDITOR_CONFIGS = {
 }
 
 ###################################
+
+#APPEND_SLASH=False

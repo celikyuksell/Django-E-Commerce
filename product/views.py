@@ -29,3 +29,7 @@ def addcomment(request,id):
          return HttpResponseRedirect(url)
 
    return HttpResponseRedirect(url)
+
+
+def colors(request):
+    return render(request,'product_color.html')

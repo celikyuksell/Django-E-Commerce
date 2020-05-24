@@ -1,0 +1,87 @@
+id	,	name	,	code
+1	,	Amaranth	,	#51114
+2	,	Amber	,	#FFBF00
+3	,	Amethyst	,	#9966CC
+4	,	Apricot	,	#FBCEB1
+5	,	Aquamarine	,	#7FFFD4
+6	,	Azure	,	#007FFF
+7	,	Baby blue	,	#89CFF0
+8	,	Beige	,	#F5F5DC
+9	,	Black	,	#000000
+10	,	Blue	,	#0000FF
+11	,	Blue-green	,	#0095B6
+12	,	Blue-violet	,	#8A2BE2
+13	,	Blush	,	#DE5D83
+14	,	Bronze	,	#CD7F32
+15	,	Brown	,	#964B00
+16	,	Burgundy	,	#800020
+17	,	Byzantium	,	#702963
+18	,	Carmine	,	#960018
+19	,	Cerise	,	#DE3163
+20	,	Cerulean	,	#007BA7
+21	,	Champagne	,	#F7E7CE
+22	,	Chartreuse green	,	#7FFF00
+23	,	Chocolate	,	#7B3F00
+24	,	Cobalt blue	,	#0047AB
+25	,	Coffee	,	#6F4E37
+26	,	Copper	,	#B87333
+27	,	Coral	,	#FF7F50
+28	,	Crimson	,	#DC143C
+29	,	Cyan	,	#00FFFF
+30	,	Desert sand	,	#EDC9Af
+31	,	Electric blue	,	#7DF9FF
+32	,	Emerald	,	#50C878
+33	,	Erin	,	#00FF3F
+34	,	Gold	,	#FFD700
+35	,	Gray	,	#808080
+36	,	Green	,	#00FF00
+37	,	Harlequin	,	#3FFF00
+38	,	Indigo	,	#4B0082
+39	,	Ivory	,	#FFFFF0
+40	,	Jade	,	#00A86B
+41	,	Jungle green	,	#29AB87
+42	,	Lavender	,	#B57EDC
+43	,	Lemon	,	#FFF700
+44	,	Lilac	,	#C8A2C8
+45	,	Lime	,	#BFFF00
+46	,	Magenta	,	#FF00FF
+47	,	Magenta rose	,	#FF00AF
+48	,	Maroon	,	#800000
+49	,	Mauve	,	#E0B0FF
+50	,	Navy blue	,	#000080
+51	,	Ochre	,	#CC7722
+52	,	Olive	,	#808000
+53	,	Orange	,	#FF6600
+54	,	Orange-red	,	#FF4500
+55	,	Orchid	,	#DA70D6
+56	,	Peach	,	#FFE5B4
+57	,	Pear	,	#D1E231
+58	,	Periwinkle	,	#CCCCFF
+59	,	Persian blue	,	#1C39BB
+60	,	Pink	,	#FD6C9E
+61	,	Plum	,	#8E4585
+62	,	Prussian blue	,	#003153
+63	,	Puce	,	#CC8899
+64	,	Purple	,	#800080
+65	,	Raspberry	,	#E30B5C
+66	,	Red	,	#FF0000
+67	,	Red-violet	,	#C71585
+68	,	Rose	,	#FF007F
+69	,	Ruby	,	#E0115F
+70	,	Salmon	,	#FA8072
+71	,	Sangria	,	#92000A
+72	,	Sapphire	,	#0F52BA
+73	,	Scarlet	,	#FF2400
+74	,	Silver	,	#C0C0C0
+75	,	Slate gray	,	#708090
+76	,	Spring bud	,	#A7FC00
+77	,	Spring green	,	#00FF7F
+78	,	Tan	,	#D2B48C
+79	,	Taupe	,	#483C32
+80	,	Teal	,	#008080
+81	,	Turquoise	,	#40E0D0
+82	,	Ultramarine	,	#3F00FF
+83	,	Violet	,	#7F00FF
+84	,	Viridian	,	#40826D
+85	,	White	,	#FFFFFF
+86	,	Yellow	,	#FFFF00

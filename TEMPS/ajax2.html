@@ -1,0 +1,152 @@
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table table-hover dt-responsive" id="dataTable">
+                {% include 'opportunity/opp_breadcrumb.html' %}
+                <h2 style="margin-left: 50%;">OPTIKA</h2>
+
+                <thead>
+                <tr>
+                    <th>Adresa Korisnika</th>
+                    <th>Područje</th>
+                    <th>Korisnik</th>
+                    <th>TIS</th>
+                    <th>Napomena</th>
+                    <th>Akcije</th>
+                    <th style="width: 5px">STATUS</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for opp in optika %}
+                    <tr>
+                        <td>{{ opp.optika_korisnik_adr }}</td>
+                        <td>{{ opp.oppc_place }}</td>
+                        <td>{{ opp.optika_korisnik }}</td>
+                        <td>{{ opp.optika_korisnik_tis_id }}</td>
+                        <td>{% if opp.oppc_comment %}{{ opp.oppc_comment }}{% else %}Bez napomene{% endif %}</td>
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal"
+                                    data-target="#detalji_modal{{ opp.pk }}">
+                                Detalji
+                            </button>
+                        </td>
+                        <td>
+                            {% if opp.is_locked %}
+                                <form action="{% url 'opportunity:delete_locked' opp.pk %}" method="POST"
+                                      style="display: table-cell">
+                                    {% csrf_token %}
+                                    <button class="btn"><i style="width: 50px;color: red" class="fa fa-lock"
+                                                           aria-hidden="true"></i></button>
+                                </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <!------------------------------------- DETALJIMODAL ---------------------------------------------->
+                    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                         id="detalji_modal{{ opp.pk }}"
+                         aria-labelledby="detalji_modalLabel">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="detalji_modalLabel">Detalji</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" id="">
+                                    <div class="container-fluid">
+                                        <h5>{{ opp.optika_korisnik }}</h5>
+                                        <p>{{ opp.optika_korisnik_adr.title }}</p>
+                                        <p>Broj linije : {{ opp.optika_broj_linije }}</p>
+                                        <p>Kontakt : {{ opp.optika_kontakt_tel1 }}</p>
+                                        <hr>
+                                        <p>Okvirni Datum : {{ opp.optika_instal_okvirni_datum }}</p>
+                                        <p>TIS Posla : {{ opp.optika_posao_tis_id }}</p>
+                                        <p>Zahtev Info : {{ opp.optika_zahev_uneo }}</p>
+                                        <hr>
+                                        <p>Datum Unosa : {{ opp.optika_zahtev_datum_unosa }}</p>
+                                        <hr>
+                                        <p>Napomena : <br> <br>
+                                            {% if opp.oppc_comment %} {{ opp.oppc_comment }} {% else %} Nema
+                                                napomene za korisnika {{ opp.optika_korisnik|title }}. {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <p style="margin-right: auto">Zahtev uneo/la : {{ opp.optika_zahev_uneo }}</p>
+                                    {% if not opp.is_locked %}
+                                        <form action="{% url 'opportunity:poziv' opp.pk %}" method="POST">
+                                            {% csrf_token %}
+                                            <button type="submit" name="poziv" class="btn btn-outline-danger">
+                                                Poziv
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    {% if opp.is_locked %}
+                                        <form action="{% url 'opportunity:delete_locked' opp.pk %}" method="POST"
+                                              style="display: table-cell">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-dark">
+                                                <i class="fas fa-lock-open"></i>
+                                                Otključaj
+                                            </button>
+                                        </form>
+                                    {% endif %}
+                                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
+                                        Zatvori
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!------------------------------------ DETALJI ENDMODAL ------------------------------------------->
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <script>
+            $(document).ready(function () {
+                setInterval(function () {
+                    $.ajax({
+                        url: '{% url 'opportunity:optika' %}',
+                        type: "get",
+                        cache: true,
+                        dataType: 'html',
+                        success: function (data) {
+                            console.log("success");
+                            $('#dataTable').html(data.rendered_table);
+                        },
+                        error: function (data) {
+                            alert("Got an error dude " + data);
+                        }
+                    });
+                }, 5000);
+            });
+        </script>
+		
+		
+def displayUser(request):
+    users = CrudUser.objects.all()
+    context = {
+        'users': users
+    }
+
+    if request.is_ajax():
+        data = {'rendered_table': render_to_string('table_contents.html', context=context)}
+        return JsonResponse(data)
+
+    return render(request, 'crud.html', context) 
+	
+
+# table_contents.html
+<tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Age</th>
+</tr>
+{% for user in users %}
+    <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.age }}</td>
+    </tr>
+{% endfor %}

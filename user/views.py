@@ -142,7 +142,7 @@ def user_orderdetail(request,id):
 def user_order_product(request):
     category = Category.objects.all()
     current_user = request.user
-    order_product = OrderProduct.objects.filter(user_id=current_user.id)
+    order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
     context = {'category': category,
                'order_product': order_product,
                }
