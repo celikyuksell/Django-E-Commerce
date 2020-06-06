@@ -1,13 +1,9 @@
 {% extends 'homebase.html' %}
-
 {% block title %} User Comments {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
-
 {% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
-
 {% block body %}
-
     <!-- BREADCRUMB -->
     <div id="breadcrumb">
         <div class="container">
@@ -27,7 +23,6 @@
                 <div class="col-md-2">
                     {% include "user_panel.html" %}
                 </div>
-
                 <div class="col-md-10">
                     <div class="section-title">
                         <h4 class="title">User Order List</h4>
@@ -61,12 +56,10 @@
                         {% endfor %}
                     </table>
                 </div>
-
             </div>
             <!-- /row -->
         </div>
         <!-- /container -->
     </div>
     <!-- /section -->
-
 {% endblock %}

@@ -6,6 +6,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
+from django.utils import translation
+
 from home.models import FAQ
 from order.models import Order, OrderProduct
 from product.models import Category, Comment
@@ -14,10 +16,10 @@ from user.models import UserProfile
 
 @login_required(login_url='/login') # Check login
 def index(request):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user  # Access User Session information
     profile = UserProfile.objects.get(user_id=current_user.id)
-    context = {'category': category,
+    context = {#'category': category,
                'profile':profile}
     return render(request,'user_profile.html',context)
 
@@ -31,16 +33,29 @@ def login_form(request):
             current_user =request.user
             userprofile=UserProfile.objects.get(user_id=current_user.id)
             request.session['userimage'] = userprofile.image.url
+            #*** Multi Langugae
+            request.session[translation.LANGUAGE_SESSION_KEY] = userprofile.language.code
+            request.session['currency'] = userprofile.currency.code
+            translation.activate(userprofile.language.code)
+
             # Redirect to a success page.
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/'+userprofile.language.code)
         else:
             messages.warning(request,"Login Error !! Username or Password is incorrect")
             return HttpResponseRedirect('/login')
     # Return an 'invalid login' error message.
 
-    category = Category.objects.all()
-    context = {'category': category}
+    #category = Category.objects.all()
+    context = {#'category': category
+     }
     return render(request, 'login_form.html',context)
+
+def logout_func(request):
+    logout(request)
+    if translation.LANGUAGE_SESSION_KEY in request.session:
+        del request.session[translation.LANGUAGE_SESSION_KEY]
+        del request.session['currency']
+    return HttpResponseRedirect('/')
 
 
 def signup_form(request):
@@ -66,16 +81,14 @@ def signup_form(request):
 
 
     form = SignUpForm()
-    category = Category.objects.all()
-    context = {'category': category,
+    #category = Category.objects.all()
+    context = {#'category': category,
                'form': form,
                }
     return render(request, 'signup_form.html', context)
 
 
-def logout_func(request):
-    logout(request)
-    return HttpResponseRedirect('/')
+
 
 @login_required(login_url='/login') # Check login
 def user_update(request):
@@ -111,28 +124,29 @@ def user_password(request):
             messages.error(request, 'Please correct the error below.<br>'+ str(form.errors))
             return HttpResponseRedirect('/user/password')
     else:
-        category = Category.objects.all()
+        #category = Category.objects.all()
         form = PasswordChangeForm(request.user)
-        return render(request, 'user_password.html', {'form': form,'category': category })
+        return render(request, 'user_password.html', {'form': form,#'category': category
+                       })
 
 @login_required(login_url='/login') # Check login
 def user_orders(request):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     orders=Order.objects.filter(user_id=current_user.id)
-    context = {'category': category,
+    context = {#'category': category,
                'orders': orders,
                }
     return render(request, 'user_orders.html', context)
 
 @login_required(login_url='/login') # Check login
 def user_orderdetail(request,id):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=id)
     orderitems = OrderProduct.objects.filter(order_id=id)
     context = {
-        'category': category,
+        #'category': category,
         'order': order,
         'orderitems': orderitems,
     }
@@ -140,22 +154,22 @@ def user_orderdetail(request,id):
 
 @login_required(login_url='/login') # Check login
 def user_order_product(request):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     order_product = OrderProduct.objects.filter(user_id=current_user.id).order_by('-id')
-    context = {'category': category,
+    context = {#'category': category,
                'order_product': order_product,
                }
     return render(request, 'user_order_products.html', context)
 
 @login_required(login_url='/login') # Check login
 def user_order_product_detail(request,id,oid):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     order = Order.objects.get(user_id=current_user.id, id=oid)
     orderitems = OrderProduct.objects.filter(id=id,user_id=current_user.id)
     context = {
-        'category': category,
+        #'category': category,
         'order': order,
         'orderitems': orderitems,
     }
@@ -163,11 +177,11 @@ def user_order_product_detail(request,id,oid):
 
 
 def user_comments(request):
-    category = Category.objects.all()
+    #category = Category.objects.all()
     current_user = request.user
     comments = Comment.objects.filter(user_id=current_user.id)
     context = {
-        'category': category,
+        #'category': category,
         'comments': comments,
     }
     return render(request, 'user_comments.html', context)
@@ -179,12 +193,3 @@ def user_deletecomment(request,id):
     messages.success(request, 'Comment deleted..')
     return HttpResponseRedirect('/user/comments')
 
-
-def faq(request):
-    category = Category.objects.all()
-    faq = FAQ.objects.filter(status="True").order_by("ordernumber")
-    context = {
-        'category': category,
-        'faq': faq,
-    }
-    return render(request, 'faq.html', context)

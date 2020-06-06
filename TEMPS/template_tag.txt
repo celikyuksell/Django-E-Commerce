@@ -1,0 +1,8 @@
+                {% load myapptags %}
+                {% get_current_language as LANGUAGE_CODE %}
+                {% categoryTree 0 '' LANGUAGE_CODE as categories %}
+                {{ categories | safe }}
+
+
+            {% load myapptags %}
+            {% categorylist  as category %}

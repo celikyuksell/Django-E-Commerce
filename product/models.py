@@ -10,6 +10,8 @@ from django.utils.safestring import mark_safe
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 
+from home.models import Language
+
 
 class Category(MPTTModel):
     STATUS = (
@@ -178,3 +180,31 @@ class Variants(models.Model):
         else:
             return ""
 
+llist= Language.objects.all()
+list1=[]
+for rs in llist:
+    list1.append((rs.code,rs.name))
+langlist= (list1)
+
+class ProductLang(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) #many to one relation with Category
+    lang =  models.CharField(max_length=6, choices=langlist)
+    title = models.CharField(max_length=150)
+    keywords = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    slug = models.SlugField(null=False, unique=True)
+    detail=RichTextUploadingField()
+
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'slug': self.slug})
+
+class CategoryLang(models.Model):
+    category = models.ForeignKey(Category, related_name='categorylangs', on_delete=models.CASCADE) #many to one relation with Category
+    lang =  models.CharField(max_length=6, choices=langlist)
+    title = models.CharField(max_length=150)
+    keywords = models.CharField(max_length=255)
+    slug = models.SlugField(null=False, unique=True)
+    description = models.CharField(max_length=255)
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})

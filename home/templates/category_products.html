@@ -222,14 +222,14 @@
 
                                 {% for rs in products %}
 									<tr>
-										<td class="thumb"><a href="/product/{{ rs.id }}/{{ rs.slug }}">
+										<td class="thumb"><a href="{% url 'product_detail' rs.id rs.slug %}">
                                             <img src="{{ rs.image.url }}" alt="" style="height: 100px">
                                         </a></td>
-										<td class="details"> <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>	</td>
+										<td class="details"> <a href="{% url 'product_detail' rs.id rs.slug %}">{{ rs.title }}</a>	</td>
 										<td class="price text-center"><strong>${{ rs.price }}</strong><br><del class="font-weak"><small>$40.00</small></del></td>
 										<td class="qty text-center"><input class="input" type="number" value="1"></td>
 
-										<td class="text-right"><a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a></td>
+										<td class="text-right"><a href="{% url "addtoshopcart" rs.id  %}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a></td>
 									</tr>
                                     {% endfor %}
 

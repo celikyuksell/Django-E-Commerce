@@ -17,6 +17,7 @@
 
 
 
+
             <div class="pull-right">
                 <ul class="header-top-links">
                     <li><a href="#">{% trans "Store" %}</a></li>
@@ -26,7 +27,6 @@
                         <form action="{% url 'selectlanguage' %}" method="post">{% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}">
                             <select name="language" >
-
                                 {% get_current_language as LANGUAGE_CODE %}
                                 {% get_available_languages as LANGUAGES %}
                                 {% get_language_info_list for LANGUAGES as languages %}
@@ -35,7 +35,6 @@
                                         {{ language.name_local }} ({{ language.code }})
                                     </option>
                                 {% endfor %}
-
                             </select>
                             <input type="submit" value="Go">
                         </form>
@@ -89,6 +88,18 @@
                         <select name="catid"  class="input search-categories">
                             <option value="0">{% trans "All Categories" %}</option>
 
+                            {% load mptt_tags %}
+
+                            {% recursetree category %}
+                                {% if node.is_leaf_node %}
+                                    <option value="{{ node.id }}">{{ node.title }}</option>
+                                {% endif %}
+                                {% if not node.is_leaf_node %}
+                                    <optgroup label="{{ node.title }}">
+                                        {{ children }}
+                                    </optgroup>
+                                {% endif %}
+                            {% endrecursetree %}
                         </select>
                         <button class="search-btn"><i class="fa fa-search"></i></button>
                     </form>
@@ -96,7 +107,7 @@
                 <!-- /Search -->
 
             </div>
-            <div class="pull-right" >
+            <div class="pull-right">
                 <ul class="header-btns">
                     <!-- Account -->
                     <li class="header-account dropdown default-dropdown">
@@ -127,10 +138,7 @@
                         <a href="{% url 'shopcart'%}" >
                             <div class="header-btns-icon">
                                 <i class="fa fa-shopping-cart"></i>
-                                {% load myapptags %}
-                                {% shopcartcount user.id as count %}
-
-                                <span class="qty">{{ count }}</span>
+                                <span class="qty">3</span>
                             </div>
                             <strong class="text-uppercase">{% trans "My Cart:" %}</strong>
                             <br>

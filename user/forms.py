@@ -19,7 +19,7 @@ class SignUpForm(UserCreationForm):
 class UserUpdateForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ( 'username','email','first_name','last_name'  )
+        fields = ( 'username','email','first_name','last_name')
         widgets = {
             'username'  : TextInput(attrs={'class': 'input','placeholder':'username'}),
             'email'     : EmailInput(attrs={'class': 'input','placeholder':'email'}),
@@ -35,7 +35,7 @@ CITY = [
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ('phone', 'address', 'city','country','image')
+        fields = ('phone', 'address', 'city','country','image','language','currency')
         widgets = {
             'phone'     : TextInput(attrs={'class': 'input','placeholder':'phone'}),
             'address'   : TextInput(attrs={'class': 'input','placeholder':'address'}),

@@ -1,5 +1,5 @@
 {% extends 'homebase.html' %}
-
+{% load i18n %}
 {% block title %} User Login  {{ setting.title }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
@@ -12,8 +12,8 @@
 	<div id="breadcrumb">
 		<div class="container">
 			<ul class="breadcrumb">
-				<li><a href="/">Home</a></li>
-				<li class="active">User Login</li>
+				<li><a href="{% url "home" %}">{% trans "Home" %}</a></li>
+				<li class="active">{% trans "User Login" %}</li>
 			</ul>
 		</div>
 	</div>
@@ -30,7 +30,7 @@
                     <div class="billing-details">
 
                         <div class="section-title">
-                            <h3 class="title">Login Form</h3>
+                            <h3 class="title">{% trans "Login Form" %}</h3>
                         </div>
 
                         {% if messages %}

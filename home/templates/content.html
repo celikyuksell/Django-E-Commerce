@@ -18,7 +18,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="product product-single">
                         <div class="product-thumb">
-                            <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+                            <a href="{% url 'product_detail' rs.id rs.slug %}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
                             <img src="{{ rs.image.url }}" alt="" style="height: 200px">
                         </div>
                         <div class="product-body">
@@ -39,7 +39,7 @@
                                 {% if rs.variant == 'None'%}
                                     <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
                                 {% else %}
-                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
+                                    <a href="{% url 'product_detail' rs.id rs.slug %}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
                                 {% endif %}
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                 <div class="col-md-3 col-sm-6 col-xs-6">
                     <div class="product product-single">
                         <div class="product-thumb">
-                            <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
+                            <a href="{% url 'product_detail' rs.id rs.slug %}" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Quick view</a>
                             <img src="{{ rs.image.url }}" alt="" style="height: 200px">
                         </div>
                         <div class="product-body">
@@ -88,7 +88,7 @@
                                  {% if rs.variant == 'None'%}
                                     <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
                                 {% else %}
-                                    <a href="/product/{{ rs.id }}/{{ rs.slug }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
+                                    <a href="{% url 'product_detail' rs.id rs.slug %}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
                                 {% endif %}
                             </div>
                         </div>

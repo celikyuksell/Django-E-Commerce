@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-02 05:00+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\home\templates\about.html:15 .\home\templates\contactus.html:15
+#: .\home\templates\sidebar.html:50
+msgid "Home"
+msgstr "Anasayfa"
+
+#: .\home\templates\about.html:16 .\home\templates\sidebar.html:51
+msgid "About Us"
+msgstr "Hakkımızda"
+
+#: .\home\templates\contactus.html:16
+#, fuzzy
+#| msgid "Contact Us"
+msgid "Contact Page"
+msgstr "İletişim"
+
+#: .\home\templates\contactus.html:34
+msgid "Contact Form"
+msgstr "İletişim Formu"
+
+#: .\home\templates\contactus.html:48
+msgid "SEND FORM"
+msgstr "Formu Gönder"
+
+#: .\home\templates\contactus.html:57
+msgid "Contact Information"
+msgstr "İletişim Bilgileri"
+
+#: .\home\templates\header.html:8 .\home\templates\header2.html:8
+msgid "Welcome to E-shop!"
+msgstr "Alışverişe Hoş Geldiniz"
+
+#: .\home\templates\header.html:22 .\home\templates\header2.html:23
+msgid "Store"
+msgstr "Mağaza"
+
+#: .\home\templates\header.html:23 .\home\templates\header2.html:24
+msgid "Newsletter"
+msgstr "Haberler"
+
+#: .\home\templates\header.html:24 .\home\templates\header2.html:25
+msgid "FAQ"
+msgstr "SSS"
+
+#: .\home\templates\header.html:90 .\home\templates\header2.html:89
+msgid "All Categories"
+msgstr "Tüm Kategoriler"
+
+#: .\home\templates\header.html:115 .\home\templates\header2.html:126
+msgid "My Account"
+msgstr "Hesabım"
+
+#: .\home\templates\header.html:116 .\home\templates\header2.html:127
+msgid "My Favorits"
+msgstr "Favaorilerim"
+
+#: .\home\templates\header.html:117 .\home\templates\header2.html:128
+msgid "My Orders "
+msgstr "Satın Aldıklarım"
+
+#: .\home\templates\header.html:118 .\home\templates\header2.html:129
+msgid "My Comments"
+msgstr "Yorumlarım"
+
+#: .\home\templates\header.html:119 .\home\templates\header2.html:130
+msgid "Logout"
+msgstr "Çıkış"
+
+#: .\home\templates\header.html:135 .\home\templates\header2.html:143
+msgid "My Cart:"
+msgstr "Sepetim"
+
+#: .\home\templates\sidebar.html:16
+#, fuzzy
+#| msgid "All Categories"
+msgid "Categories"
+msgstr "Tüm Kategoriler"
+
+#: .\home\templates\sidebar.html:52
+msgid "Contact Us"
+msgstr "İletişim"
+
+#, fuzzy
+#~| msgid "Contact Us"
+#~ msgid "Contact"
+#~ msgstr "İletişim"
+
+#, fuzzy
+#~| msgid "About Us"
+#~ msgid "Aabout Us"
+#~ msgstr "Hakkımızda"
+
+#~ msgid "English (ENG)"
+#~ msgstr "İngilizce (ENG)"
+
+#~ msgid "Spanish (Es)"
+#~ msgstr "Ispanyolca (Es)"
+
+#~ msgid "French (FR)"
+#~ msgstr "Fransızca (FR)"
+
+#~ msgid "Russian (Ru)"
+#~ msgstr "Rusça (Ru)"

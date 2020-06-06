@@ -1,5 +1,5 @@
 {% extends 'homebase.html' %}
-
+{% load i18n %}
 {% block title %} Contact Us-{{ setting.title }} {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
@@ -12,8 +12,8 @@
     <div id="breadcrumb">
         <div class="container">
             <ul class="breadcrumb">
-                <li><a href="/">Home</a></li>
-                <li class="active">Contact Us</li>
+                <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                <li class="active">{% trans "Contact Page" %}</li>
             </ul>
         </div>
     </div>
@@ -31,7 +31,7 @@
                     <div class="billing-details">
 
                         <div class="section-title">
-                            <h3 class="title">Contact Form</h3>
+                            <h3 class="title">{% trans "Contact Form"%}</h3>
 
                             {% if messages %}
                                 {% for message in messages %}
@@ -45,7 +45,7 @@
                         <form id="checkout-form" class="clearfix" method="post">
                             {% csrf_token %}
                             {{ form.as_p }}
-                            <input type="submit" value="SEND FORM">
+                            <input type="submit" value="{% trans "SEND FORM" %}">
                         </form>
                     </div>
 
@@ -54,7 +54,7 @@
                 <div class="col-md-8">
                     <div class="shiping-methods">
                         <div class="section-title">
-                            <h3 class="title">Contact Information</h3>
+                            <h3 class="title">{% trans "Contact Information"%}</h3>
                         </div>
                         <div >
                             {{ setting.contact|safe }}
