@@ -14,6 +14,7 @@
             {% endif %}
 
             <span class="category-header">{% trans "Categories" %} <i class="fa fa-list"></i></span>
+
             {% get_current_language as LANGUAGE_CODE %}
             {% load myapptags %}
             {% categoryTree 0 '' LANGUAGE_CODE as category %}

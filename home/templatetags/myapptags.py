@@ -19,15 +19,15 @@ def shopcartcount(userid):
     count = ShopCart.objects.filter(user_id=userid).count()
     return count
 
-
+# views-> "category =  categoryTree(0,'','tr')"  html-> "ategoryTree 0 '' LANGUAGE_CODE as category"
 @register.simple_tag
 def categoryTree(id,menu,lang):
     defaultlang = settings.LANGUAGE_CODE[0:2]
     #lang='tr'
     if id <= 0: # Main categories
-        if lang == defaultlang:
+        if lang == defaultlang: # default language
             query = Category.objects.filter(parent_id__isnull=True).order_by("id")
-        else:
+        else: # non default language
             query = Category.objects.raw('SELECT c.id,l.title, l.keywords, l.description,l.slug' 
                                       '  FROM product_category as c'
                                       '  INNER JOIN product_categorylang as	l'
@@ -35,9 +35,9 @@ def categoryTree(id,menu,lang):
                                       '  WHERE  parent_id IS NULL and lang=%s ORDER BY c.id',[lang])
         querycount = Category.objects.filter(parent_id__isnull=True).count()
     else: # Sub Categories
-        if lang == defaultlang:
+        if lang == defaultlang: # default language
             query = Category.objects.filter(parent_id=id)
-        else:
+        else: # non default language
             query = Category.objects.raw('SELECT c.id,l.title, l.keywords, l.description,l.slug'
                                      '  FROM product_category as c'
                                      '  INNER JOIN product_categorylang as	l'
