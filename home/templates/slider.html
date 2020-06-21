@@ -1,3 +1,4 @@
+{% load currency %}
 {% load static %}
 	<!-- HOME -->
 	<div id="home">
@@ -13,9 +14,10 @@
 					<div class="banner banner-1">
 						<img src="{{ rs.image.url }}" alt="" style="height: 600px">
 						<div class="banner-caption text-center">
-							<h1>{{ rs.title }}</h1>
-							<h3 class="white-color font-weak">$ {{ rs.price }}</h3>
+							<h1>{{ rs.title }}   </h1>
+							<h3 class="white-color font-weak">  {{ rs.price|currency:request.session.currency }} {{ request.session.currency }} </h3>
 							<a href="{% url 'product_detail' rs.id rs.slug %}" class="primary-btn">Shop Now</a>
+
 						</div>
 					</div>
 					<!-- /banner -->

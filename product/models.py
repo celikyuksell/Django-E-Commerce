@@ -64,7 +64,7 @@ class Product(models.Model):
     keywords = models.CharField(max_length=255)
     description = models.TextField(max_length=255)
     image=models.ImageField(upload_to='images/',null=False)
-    price = models.FloatField(default=0)
+    price = models.DecimalField(max_digits=12, decimal_places=2,default=0)
     amount=models.IntegerField(default=0)
     minamount=models.IntegerField(default=3)
     variant=models.CharField(max_length=10,choices=VARIANTS, default='None')
@@ -160,7 +160,7 @@ class Variants(models.Model):
     size = models.ForeignKey(Size, on_delete=models.CASCADE,blank=True,null=True)
     image_id = models.IntegerField(blank=True,null=True,default=0)
     quantity = models.IntegerField(default=1)
-    price = models.FloatField(default=0)
+    price = models.DecimalField(max_digits=12, decimal_places=2,default=0)
 
     def __str__(self):
         return self.title

@@ -1,5 +1,5 @@
 {% extends 'homebase.html' %}
-
+{% load currency %}
 {% block title %} {{ query }} results {% endblock %}
 {% block description %} {{ setting.description }} {% endblock %}
 {% block keywords %} {{ setting.keywords }} {% endblock %}
@@ -96,7 +96,7 @@
 
 										<td class="details"> <a href="/product/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</a>	</td>
                                         <td class="details"> <a href="/category/{{ rs.category_id }}/{{ rs.category.slug }}">{{ rs.category }}</a>	</td>
-										<td class="price text-center"><strong>${{ rs.price }}</strong></td>
+										<td class="price text-center"><strong>{{ rs.price|currency:request.session.currency }} {{ request.session.currency }}</strong></td>
 										<td class="qty text-center"><input class="input" type="number" value="1"></td>
 
 										<td class="text-right"><a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a></td>

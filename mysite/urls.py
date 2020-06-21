@@ -27,10 +27,14 @@ from django.utils.translation import gettext_lazy as _
 
 urlpatterns = [
     path('selectlanguage', views.selectlanguage, name='selectlanguage'),
+    path('selectcurrency', views.selectcurrency, name='selectcurrency'),
+    path('savelangcur', views.savelangcur, name='savelangcur'),
     path('i18n/', include('django.conf.urls.i18n')),
 ]
 
+
 urlpatterns += i18n_patterns(
+    path('currencies/', include('currencies.urls')),
     path(_('admin/'), admin.site.urls),
     path('', views.index, name='home'),
     path('home/', include('home.urls')),
@@ -38,7 +42,7 @@ urlpatterns += i18n_patterns(
     path('order/', include('order.urls')),
     path('user/', include('user.urls'), name='user'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    # path('yonetim/', admin.site.urls),
+
 
     path(_('about/'), views.aboutus, name='aboutus'),
     path(_('contact/'), views.contactus, name='contactus'),
@@ -53,4 +57,4 @@ urlpatterns += i18n_patterns(
     path('faq/', views.faq, name='faq'),
     path('ajaxcolor/', views.ajaxcolor, name='ajaxcolor'),
     prefix_default_language=False,
-) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+)+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

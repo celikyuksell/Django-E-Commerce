@@ -1,6 +1,7 @@
 {% extends 'homebase.html' %}
 {% load static %}
 {% load i18n %}
+{% load currency %}
 {% block title %} {{ product.title }} {% endblock %}
 {% block description %} {{ product.description }} {% endblock %}
 {% block keywords %} {{ product.keywords }} {% endblock %}
@@ -137,7 +138,7 @@
                                                             <input type="radio"  {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
                                                             <li  {% if variant.id == rs.id %} class="active" {% endif %}>
                                                                 <a style="background-color:{{ rs.color.code }}; color: #D9D9D9; text-shadow: 1px 1px #000000; width: 90px">
-                                                                    ${{ rs.price }} {{ rs.color }}
+                                                                    {{ rs.price|currency:request.session.currency }} {{ request.session.currency }} {{ rs.color }}
                                                                 </a>
                                                                 <img src="{{ rs.image }}" style="height: 70px">
                                                             </li>
@@ -159,7 +160,7 @@
                                                         <input type="radio"  {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
                                                         <li  {% if variant.id == rs.id %} class="active" {% endif %}>
                                                             <a style=" color: #204d74;  width: 90px">
-                                                                ${{ rs.size }}<br> ${{ rs.price }}
+                                                                ${{ rs.size }}<br> {{ rs.price|currency:request.session.currency }} {{ request.session.currency }}
                                                             </a>
                                                         </li>
                                                     {% endfor %}
@@ -179,7 +180,7 @@
                                                         <input type="radio"  {% if variant.id == rs.id %} checked {% endif %} name="variantid" id="variantid" value="{{ rs.id }}" onchange="this.form.submit();">
                                                         <li  {% if variant.id == rs.id %} class="active" {% endif %}>
                                                             <a style="background-color:{{ rs.color.code }}; color: #D9D9D9; text-shadow: 1px 1px #000000; width: 90px">
-                                                                ${{ rs.price }} {{ rs.color }}
+                                                                {{ rs.price|currency:request.session.currency }} {{ request.session.currency }} {{ rs.color }}
                                                             </a>
                                                             <img src="{{ rs.image }}" style="height: 70px">
                                                         </li>
@@ -214,7 +215,7 @@
                                     {% csrf_token %}
                                     <div id="SelectedProduct">
                                         <p><strong>Availability:</strong> {% if product.amount > 0  %} In Stock {% else %} Out of Stock {% endif %}</p>
-                                        <h3 class="product-price">$ {{ product.price}}</h3>
+                                        <h3 class="product-price">{{ product.price|currency:request.session.currency }} {{ request.session.currency }}</h3>
                                         <div class="qty-input">
                                             <span class="text-uppercase">QTY: </span>
                                             <input class="input" name="quantity" type="number" value="1" min="1" max="{{ product.amount }}">

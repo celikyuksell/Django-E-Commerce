@@ -15,9 +15,15 @@
 
             <span class="category-header">{% trans "Categories" %} <i class="fa fa-list"></i></span>
 
-            {% get_current_language as LANGUAGE_CODE %}
+
             {% load myapptags %}
-            {% categoryTree 0 '' LANGUAGE_CODE as category %}
+            {% if LANGUAGE_CODE is None %}
+                {% get_current_language as LANGUAGE_CODE %}
+                {% categoryTree 0 '' LANGUAGE_CODE as category %}
+            {% else %}
+                {% categoryTree 0 '' 'en' as category %}
+            {% endif %}
+
 
             <ul class="category-list">
                 {{ category | safe  }}

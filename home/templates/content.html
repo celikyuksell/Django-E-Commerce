@@ -1,3 +1,4 @@
+{% load currency %}
 {% load static %}
 
 <!-- section -->
@@ -22,7 +23,7 @@
                             <img src="{{ rs.image.url }}" alt="" style="height: 200px">
                         </div>
                         <div class="product-body">
-                            <h3 class="product-price">${{ rs.price }}</h3>
+                            <h3 class="product-price">{{ rs.price|currency:request.session.currency }} {{ request.session.currency }}</h3>
                             <div class="product-rating">
                                 <i class="fa fa-star{% if rs.avaregereview < 1%}-o empty{% endif%}"></i>
                                 <i class="fa fa-star{% if rs.avaregereview < 2%}-o empty{% endif%}"></i>
@@ -72,7 +73,7 @@
                             <img src="{{ rs.image.url }}" alt="" style="height: 200px">
                         </div>
                         <div class="product-body">
-                            <h3 class="product-price">${{ rs.price }}</h3>
+                            <h3 class="product-price">{{ rs.price|currency:request.session.currency }} {{ request.session.currency }} </h3>
                             <div class="product-rating">
                                 <i class="fa fa-star{% if rs.avaregereview < 1%}-o empty{% endif%}"></i>
                                 <i class="fa fa-star{% if rs.avaregereview < 2%}-o empty{% endif%}"></i>
@@ -86,7 +87,7 @@
                                 <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
                                 <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
                                  {% if rs.variant == 'None'%}
-                                    <a href="/order/addtoshopcart/{{ rs.id }}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                                    <a href="{% url 'addtoshopcart' rs.id %}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
                                 {% else %}
                                     <a href="{% url 'product_detail' rs.id rs.slug %}" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Detail</a>
                                 {% endif %}

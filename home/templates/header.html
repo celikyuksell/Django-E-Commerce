@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load currency %}
 <header>
     <!-- top Header -->
     <div id="top-header">
@@ -17,6 +18,7 @@
 
 
 
+
             <div class="pull-right">
                 <ul class="header-top-links">
                     <li><a href="#">{% trans "Store" %}</a></li>
@@ -25,7 +27,7 @@
                     <li class="dropdown default-dropdown">
                         <form action="{% url 'selectlanguage' %}" method="post">{% csrf_token %}
                             <input name="next" type="hidden" value="{{ redirect_to }}">
-                            <select name="language" >
+                            <select name="language" onchange="submit()" >
 
                                 {% get_current_language as LANGUAGE_CODE %}
                                 {% get_available_languages as LANGUAGES %}
@@ -37,17 +39,40 @@
                                 {% endfor %}
 
                             </select>
-                            <input type="submit" value="Go">
+                            <noscript>
+                                <input type="submit" value="Set" />
+                            </noscript>
                         </form>
                     </li>
 
                     <li class="dropdown default-dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">USD <i class="fa fa-caret-down"></i></a>
-                        <ul class="custom-menu">
-                            <li><a href="#">USD ($)</a></li>
-                            <li><a href="#">EUR (€)</a></li>
-                        </ul>
+
+
+                        <form id="currency_switcher" method="POST" action="{% url 'selectcurrency' %}">
+                            {% csrf_token %}
+                            <select name="currency" onchange="submit()" >
+                                {% for curr in CURRENCIES %}
+                                    <option value="{{ curr.code }}"
+                                            {% ifequal curr.code request.session.currency %}selected="selected"{% endifequal %}>
+                                        {{ curr.symbol }} {{ curr.name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+
+                            <noscript>
+                                <input type="submit" value="Set" />
+                            </noscript>
+
+                        </form>
                     </li>
+
+                    <li class="dropdown default-dropdown">
+                        <form id="currency_switcher" method="POST" action="{% url 'savelangcur' %}">
+                            {% csrf_token %}
+                            <input type="submit" value="Save" />
+                        </form>
+                    </li>
+
                 </ul>
             </div>
         </div>

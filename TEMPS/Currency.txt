@@ -1,0 +1,37 @@
+1- Install Package
+	pip install django-currencies
+	https://pypi.org/project/django-currencies/
+
+2- Settings
+ 
+	INSTALLED_APPS += (
+   	 'currencies',
+	)
+
+	TEMPLATES = [
+   
+    		'currencies.context_processors.currencies',
+
+	DEFAULT_CURRENCY = 'USD'
+
+3- Urls
+	path('currencies/', include('currencies.urls')),
+	path('selectcurrency', views.selectcurrency, name='selectcurrency'),
+4-Model
+	migrate
+	userprofile currency relation
+	
+
+5- views
+	def index():
+		Check currency set currency
+	
+	def selectcurrency():
+		Change to seleckted currency     
+6- templates
+	{% load currency %}
+	Select currency form
+	Save language and Currency form
+	
+	Show Price debend on currency
+	{{ rs.price|currency:request.session.currency }}
