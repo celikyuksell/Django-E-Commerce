@@ -1,0 +1,21 @@
+# Some comments
+msgid ""
+msgstr ""
+"Project-Id-Version: test2\n"
+"POT-Creation-Date: 2007-05-31 22:15+0100\n"
+"Last-Translator: Hanno C. Schlichting <hanno@hannosch.eu>\n"
+"Language-Team: <>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+# comment1
+#. More comments: "default1"
+#: folder1/file1
+msgid "msgid1"
+msgstr "msgstr1"
+
+#, fuzzy
+msgid "msgid2"
+msgstr "msgstr2"

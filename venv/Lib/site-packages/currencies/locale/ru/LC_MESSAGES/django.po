@@ -1,0 +1,72 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: django-currencies\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-26 18:14+0600\n"
+"PO-Revision-Date: 2015-03-31 11:01+0600\n"
+"Last-Translator: Basil Shubin <basil.shubin@gmail.com>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"Language: Russian \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: models.py:11
+msgid "code"
+msgstr "код"
+
+#: models.py:12
+msgid "name"
+msgstr "название"
+
+#: models.py:13
+msgid "symbol"
+msgstr "символ"
+
+#: models.py:15
+msgid "factor"
+msgstr ""
+
+#: models.py:16
+msgid "Specifies the difference of the currency to default one."
+msgstr ""
+
+#: models.py:18
+msgid "active"
+msgstr ""
+
+#: models.py:19
+msgid "The currency will be available."
+msgstr ""
+
+#: models.py:20
+msgid "base"
+msgstr ""
+
+#: models.py:21
+msgid "Make this the base currency against which rates are calculated."
+msgstr ""
+
+#: models.py:22
+msgid "default"
+msgstr "по-умолчанию"
+
+#: models.py:23
+msgid "Make this the default user currency."
+msgstr ""
+
+#: models.py:30
+msgid "currency"
+msgstr "валюта"
+
+#: models.py:31
+msgid "currencies"
+msgstr "валюты"

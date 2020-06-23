@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Panos Laganakos <panos.laganakos@gmail.com>, 2009.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: django-currencies\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-26 18:14+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Panos Laganakos <panos.laganakos@gmail.com>\n"
+"Language-Team: Greek <el@li.org>\n"
+"Language: Greek \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: models.py:11
+msgid "code"
+msgstr "κώδικας"
+
+#: models.py:12
+msgid "name"
+msgstr "όνομα"
+
+#: models.py:13
+msgid "symbol"
+msgstr "σύμβολο"
+
+#: models.py:15
+msgid "factor"
+msgstr "παράγοντας"
+
+#: models.py:16
+msgid "Specifies the difference of the currency to default one."
+msgstr ""
+"Προσδιορίζει τη διαφόρα του νομίσματος ως προς το προεπιλεμένο (νόμισμα)."
+
+#: models.py:18
+msgid "active"
+msgstr "ενεργό"
+
+#: models.py:19
+msgid "The currency will be available."
+msgstr "Το νόμισμα θα είναι διαθέσιμο."
+
+#: models.py:20
+msgid "base"
+msgstr ""
+
+#: models.py:21
+msgid "Make this the base currency against which rates are calculated."
+msgstr ""
+
+#: models.py:22
+msgid "default"
+msgstr "προεπιλεμένο"
+
+#: models.py:23
+#, fuzzy
+#| msgid "Make this the default currency."
+msgid "Make this the default user currency."
+msgstr "Να γίνει αυτό το προεπιλεγμένο νόμισμα."
+
+#: models.py:30
+msgid "currency"
+msgstr "νόμισμα"
+
+#: models.py:31
+msgid "currencies"
+msgstr "νομίσματα"

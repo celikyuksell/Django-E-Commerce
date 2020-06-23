@@ -1,0 +1,22 @@
+# Translation of foo.pot to Afrikaans
+# Mighty translator, 2007
+msgid ""
+msgstr ""
+"Project-Id-Version: foo\n"
+"POT-Creation-Date: 2007-09-01 12:34+0000\n"
+"PO-Revision-Date: 2006-05-26 14:12+0200\n"
+"Last-Translator: Mighty translator\n"
+"Language-Team: Afrikaans <nomail@mail.no>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: af\n"
+"Language-Name: Afrikaans\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: foo\n"
+
+#. Default: "Message 1"
+#: ./foo/bar.py:42
+msgid "message_1"
+msgstr "Message 1"

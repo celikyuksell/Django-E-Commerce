@@ -1,0 +1,28 @@
+[
+    {
+        "pk": 1, 
+        "model": "currencies.currency", 
+        "fields": {
+            "code": "EUR", 
+            "name": "Euro", 
+            "symbol": "\u20ac", 
+            "is_active": true, 
+            "is_default": true, 
+            "is_base": true, 
+            "factor": "1"
+        }
+    },
+    {
+        "pk": 2, 
+        "model": "currencies.currency", 
+        "fields": {
+            "code": "USD", 
+            "name": "US Dollar", 
+            "symbol": "$", 
+            "is_active": true, 
+            "is_default": false, 
+            "is_base": false, 
+            "factor": "1.5"
+        }
+    }
+]

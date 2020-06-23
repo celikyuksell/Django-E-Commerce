@@ -1,0 +1,20 @@
+{% load currency %}{% spaceless %}
+{% comment %} Example angular-ui >0.14.0, bootstrap3 & Font Awesome currency-chooser {% endcomment %}
+
+{% currency_context %}
+
+{% if CURRENCIES|length > 1 %}
+<li class="dropdown {{ dropdown_extra_class }}" uib-dropdown>
+    <a class="dropdown-toggle" title="{{ CURRENCY.name }}" uib-dropdown-toggle>
+        <i class="fa fa-money"></i>&nbsp;{{ CURRENCY_CODE }}&nbsp;<b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+    {% for curr in CURRENCIES %}
+        <li{% ifequal curr.code CURRENCY_CODE %} class="active"{% endifequal %}>
+            <a href="{% url 'currencies_set_currency' %}?currency_code={{ curr.code }}"
+                title="{{ curr.name }}">{{ curr.symbol|default:"&nbsp;" }}&nbsp;{{ curr.code }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</li>
+{% endif %}{% endspaceless %}

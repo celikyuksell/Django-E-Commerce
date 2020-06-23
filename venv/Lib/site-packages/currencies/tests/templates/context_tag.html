@@ -1,0 +1,7 @@
+{% load currency %}
+{% currency_context %}
+
+
+{% for curr in CURRENCIES %}{{ curr.code }}{% endfor %}
+{{ CURRENCY_CODE }}
+{{ CURRENCY }}
