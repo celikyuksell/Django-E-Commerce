@@ -7,7 +7,7 @@ https://www.youtube.com/watch?v=UByiPW2zRy4&list=PLIUezwWmVtFXaHcJ63ZM6uOJdhMrnZ
  Clone as zip file and open it your computer or if you have git application<br>
  https://github.com/celikyuksell/Django-E-Commerce.git<br>
  
-<b>Before running this project you need intall below list appa and packages</b><br>
+<b>Before running this project you need intall below list apps and packages</b><br>
 
 Install Python 3.7 or above -> https://www.python.org/<br>
 Install Pip   -> python get-pip.py<br>
