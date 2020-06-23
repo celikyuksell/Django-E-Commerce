@@ -25,7 +25,7 @@ pip install Pillow<br>
 
 python manage.py runserver<br>
 
-<b>Playlist Videos Titles</b> <br>
+<b>Playlist Video Topics</b> <br>
 1 Django Installation Structure Introduction <br>
 2 Django E Commerce css web template implementation <br>
 3 Django E Commerce database model admin relation category and product image upload <br>
