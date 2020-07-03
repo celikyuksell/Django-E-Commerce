@@ -18,30 +18,33 @@ def index(request):
 def addtoshopcart(request,id):
     url = request.META.get('HTTP_REFERER')  # get last url
     current_user = request.user  # Access User Session information
-    variantid = request.POST.get('variantid')  # from variant add to cart
-    checkinproduct = ShopCart.objects.filter(product_id=id) # Check product in shopcart
-    checkinvariant = ShopCart.objects.filter(variant_id=variantid)  # Check product in shopcart
+    product= Product.objects.get(pk=id)
 
-    control = 0
-    if checkinproduct:
-        control = 1
-    if checkinvariant:
-        control = 1
-
-
-    """if checkinproduct and checkinvariant:
-        control = 1 # The product is in the cart
+    if product.variant != 'None':
+        variantid = request.POST.get('variantid')  # from variant add to cart
+        checkinvariant = ShopCart.objects.filter(variant_id=variantid, user_id=current_user.id)  # Check product in shopcart
+        if checkinvariant:
+            control = 1 # The product is in the cart
+        else:
+            control = 0 # The product is not in the cart"""
     else:
-        control = 0 # The product is not in the cart"""
+        checkinproduct = ShopCart.objects.filter(product_id=id, user_id=current_user.id) # Check product in shopcart
+        if checkinproduct:
+            control = 1 # The product is in the cart
+        else:
+            control = 0 # The product is not in the cart"""
 
     if request.method == 'POST':  # if there is a post
         form = ShopCartForm(request.POST)
         if form.is_valid():
-           if control==1: # Update  shopcart
-                data = ShopCart.objects.get(product_id=id)
+            if control==1: # Update  shopcart
+                if product.variant == 'None':
+                    data = ShopCart.objects.get(product_id=id, user_id=current_user.id)
+                else:
+                    data = ShopCart.objects.get(product_id=id, variant_id=variantid, user_id=current_user.id)
                 data.quantity += form.cleaned_data['quantity']
                 data.save()  # save data
-           else : # Inser to Shopcart
+            else : # Inser to Shopcart
                 data = ShopCart()
                 data.user_id = current_user.id
                 data.product_id =id
@@ -53,7 +56,7 @@ def addtoshopcart(request,id):
 
     else: # if there is no post
         if control == 1:  # Update  shopcart
-            data = ShopCart.objects.get(product_id=id)
+            data = ShopCart.objects.get(product_id=id, user_id=current_user.id)
             data.quantity += 1
             data.save()  #
         else:  #  Inser to Shopcart
@@ -78,7 +81,7 @@ def shopcart(request):
     context={'shopcart': shopcart,
              'category':category,
              'total': total,
-              }
+             }
     return render(request,'shopcart_products.html',context)
 
 @login_required(login_url='/login') # Check login
