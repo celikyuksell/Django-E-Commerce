@@ -1,3 +1,7 @@
+Admin Superuser Information
+User Name : yuksel
+User Passw: qwert12345
+
 # Django-E-Commerce
 This project is a multilingual and multi-currency e-commerce Python Djnago web project.<br><br>
 Youtube playlist  of the project (Playlist include 36 videos):<br>
