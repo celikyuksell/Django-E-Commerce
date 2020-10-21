@@ -1,6 +1,6 @@
-Admin Superuser Information
-User Name : yuksel
-User Passw: qwert12345
+<b>Admin Superuser Information</b> <br>
+<b>User Name :</b> yuksel<br>
+<b>User Passw:</b> qwert12345<br>
 
 # Django-E-Commerce
 This project is a multilingual and multi-currency e-commerce Python Djnago web project.<br><br>
