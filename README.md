@@ -12,7 +12,14 @@ Web Template of this prpoject:  https://colorlib.com/wp/template/e-shop/ <br>
 <b> Downloading project:</b><br>
  Clone as zip file and open it your computer or if you have git application<br>
  https://github.com/celikyuksell/Django-E-Commerce.git<br>
+
+### Docker
+```
+docker build -t django-e-commerce .
+docker run -p 8000:8000 django-e-commerce
+```
  
+### Manual Installation
 <b>Before running this project you need intall below list apps and packages</b><br>
 
 Install Python 3.7 or above -> https://www.python.org/<br>
